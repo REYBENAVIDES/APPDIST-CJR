@@ -1,3 +1,4 @@
+CAPTURAS APP MÓVIL
 ![image](https://github.com/REYBENAVIDES/DispositivosInteligentes/assets/137514816/9674590a-c265-4d51-9f44-2ff479711e64)
 ![image](https://github.com/REYBENAVIDES/DispositivosInteligentes/assets/137514816/422fe0cd-685a-4e2a-b02d-360b05035a50)
 ![image](https://github.com/REYBENAVIDES/DispositivosInteligentes/assets/137514816/d13b2442-83b4-458f-a1df-38269c681212)
