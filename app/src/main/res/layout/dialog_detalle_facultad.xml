@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/crdCitas"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="8dp"
+    app:cardBackgroundColor="#FFFFFF"
+    app:cardCornerRadius="20dp"
+    app:layout_constraintBottom_toBottomOf="parent"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toTopOf="parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <ImageView
+            android:id="@+id/imageView2"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="16dp"
+            app:srcCompat="@drawable/informacion" />
+
+        <TextView
+            android:id="@+id/txtvEncabezado"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="24dp"
+            android:layout_marginRight="24dp"
+            android:layout_weight="1"
+            android:text="¿Quieres eliminar la facultad 1?"
+            android:textAlignment="center"
+            android:textColor="#80B4FB"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
+        <LinearLayout
+            android:id="@+id/llAulas"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="24dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginRight="24dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/imgAulas"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_marginRight="8dp"
+                android:scaleType="centerCrop"
+                android:tint="#80B4FB"
+                app:srcCompat="@drawable/aulas_dispositivos" />
+
+            <TextView
+                android:id="@+id/txtAvisoAulas"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Cuenta con 3 aulas"
+                android:textColor="#000000" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/llDispositivos"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="24dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginRight="24dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/imgDispositivo"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_marginRight="8dp"
+                android:scaleType="centerCrop"
+                android:tint="#80B4FB"
+                app:srcCompat="@drawable/info_dispositivo" />
+
+            <TextView
+                android:id="@+id/txtAvisoDispositivo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Cuenta con 5 dispositivos"
+                android:textColor="#000000" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="24dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginRight="24dp"
+            android:layout_marginBottom="30dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/imgDispositivoActivo"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_marginRight="8dp"
+                android:scaleType="centerCrop"
+                android:tint="#80B4FB"
+                app:srcCompat="@drawable/info_dispositivo_activo" />
+
+            <TextView
+                android:id="@+id/txtAvisoDispositivoActivo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Cuenta con 5 dispositivos"
+                android:textColor="#000000" />
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+
+</androidx.cardview.widget.CardView>

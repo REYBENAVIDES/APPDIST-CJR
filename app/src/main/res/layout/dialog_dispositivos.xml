@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="10dp"
+    app:cardBackgroundColor="#FFFFFF"
+    app:cardCornerRadius="20dp"
+    app:cardElevation="5dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center_horizontal"
+        android:orientation="vertical">
+
+        <ImageView
+            android:id="@+id/imgLogo"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_margin="20dp"
+            app:srcCompat="@drawable/logo_uteq" />
+
+        <TextView
+            android:id="@+id/txtEncabezadoDialog"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="24dp"
+            android:layout_marginRight="24dp"
+            android:layout_marginBottom="10dp"
+            android:text="Agregar dispositivo"
+            android:textAlignment="center"
+            android:textColor="#007224"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/motivo_text_input_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="24dp"
+            android:layout_marginRight="24dp"
+            android:layout_marginBottom="8dp"
+            android:layout_weight="1"
+            android:textColorHint="#007224"
+            app:boxCornerRadiusBottomEnd="10dp"
+            app:boxCornerRadiusBottomStart="10dp"
+            app:boxCornerRadiusTopEnd="10dp"
+            app:boxCornerRadiusTopStart="10dp"
+            app:boxStrokeColor="@color/color_normal_textinput"
+            app:hintTextColor="#007224">
+
+            <EditText
+                android:id="@+id/txtMotivoDialog"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:ems="10"
+                android:hint="Nombre"
+                android:inputType="text|textMultiLine"
+                android:textColor="#000000"
+                android:textColorHighlight="#007224" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <Spinner
+            android:id="@+id/spnMarca"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="24dp"
+            android:layout_marginRight="24dp"
+            android:layout_marginBottom="8dp"
+            android:background="@drawable/border_verde_button"
+            android:padding="10dp" />
+
+        <Spinner
+            android:id="@+id/spnModelo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="24dp"
+            android:layout_marginRight="24dp"
+            android:layout_marginBottom="8dp"
+            android:background="@drawable/border_verde_button"
+            android:padding="10dp" />
+
+        <LinearLayout
+            android:id="@+id/llFoto"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="24dp"
+            android:layout_marginRight="24dp"
+            android:orientation="horizontal"
+            android:visibility="gone">
+
+            <Button
+                android:id="@+id/btnSelecionarFoto"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_weight="1"
+                android:backgroundTint="#FFFFFF"
+                android:insetTop="0dp"
+                android:insetBottom="0dp"
+                android:paddingTop="0dp"
+                android:paddingBottom="0dp"
+                android:text="Selecionar logo"
+                android:textColor="#007224"
+                app:cornerRadius="10dp"
+                app:iconGravity="textStart"
+                app:strokeColor="@color/verdeUteq"
+                app:strokeWidth="1dp" />
+
+            <ImageView
+                android:id="@+id/imgFotoSelecion"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_marginLeft="10dp"
+                android:background="@drawable/border_verde_button"
+                android:padding="6.5dp"
+                android:scaleType="centerCrop"
+                app:srcCompat="@drawable/facultad_fci" />
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/btnAgregarDialog"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="24dp"
+            android:layout_marginBottom="16dp"
+            android:layout_weight="1"
+            android:backgroundTint="#007224"
+            android:insetTop="0dp"
+            android:insetBottom="0dp"
+            android:text="Agregar"
+            android:textColor="#FFFFFF"
+            android:visibility="visible"
+            app:cornerRadius="10dp"
+            app:iconGravity="textStart" />
+
+    </LinearLayout>
+
+</androidx.cardview.widget.CardView>

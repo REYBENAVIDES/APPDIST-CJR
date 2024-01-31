@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="AppBottomNavigationView" parent="Widget.Design.BottomNavigationView">
+        <item name="android:background">#2196F3</item>
+        <item name="android:itemBackground">@drawable/item_selecionados_navegation</item>
+    </style>
+
+
+</resources>
