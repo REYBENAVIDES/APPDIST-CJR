@@ -91,7 +91,7 @@
         android:layout_marginTop="16dp"
         android:layout_marginEnd="32dp"
         android:buttonTint="#007224"
-        android:text="Estoy de acuerdo con las Condiciones de uso y Politica de privacidad de smarklock"
+        android:text="Estoy de acuerdo con las Condiciones de uso y Politica de privacidad"
         android:textColor="#000000"
         android:textSize="12sp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -128,5 +128,18 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/clave_text_input_layout" />
+
+    <TextView
+        android:id="@+id/txtProbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="8dp"
+        android:maxLines="10"
+        android:text="TextView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnIniciarSesion" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

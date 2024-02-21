@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
@@ -22,13 +24,13 @@
             android:name=".Activity_Dispositivos"
             android:exported="false" />
         <activity
-            android:name=".Activity_Bienvenida"
+            android:name=".Activity_IniciarSesion"
             android:exported="false" />
         <activity
             android:name=".Activity_Aulas"
             android:exported="false" />
         <activity
-            android:name=".Activity_IniciarSesion"
+            android:name=".Activity_Bienvenida"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
