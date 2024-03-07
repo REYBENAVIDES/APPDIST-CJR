@@ -2,17 +2,17 @@ package com.example.dispositivosinteligentes.Modelo;
 
 public class Dispositivo {
 
-    private final int idDispositivo;
-    private final int idAula;
+    private final int id_dispositivo;
+    private final Aula aula;
     private final String nombre;
     private final String marca;
     private final String modelo;
-    private final boolean estado;
-    private final boolean estado2 = false;
+    private boolean estado;
+    private boolean estado2 = false;
 
-    public Dispositivo(int idDispositivo, int idAula, String nombre, String marca, String modelo, boolean estado) {
-        this.idDispositivo = idDispositivo;
-        this.idAula = idAula;
+    public Dispositivo(int idDispositivo, Aula idAula, String nombre, String marca, String modelo, boolean estado) {
+        this.id_dispositivo = idDispositivo;
+        this.aula = idAula;
         this.nombre = nombre;
         this.marca = marca;
         this.modelo = modelo;
@@ -20,11 +20,11 @@ public class Dispositivo {
     }
 
     public int getIdDispositivo() {
-        return idDispositivo;
+        return id_dispositivo;
     }
 
-    public int getIdAula() {
-        return idAula;
+    public Aula getIdAula() {
+        return aula;
     }
 
     public String getNombre() {
@@ -43,7 +43,15 @@ public class Dispositivo {
         return estado;
     }
 
+    public void setEstado(boolean estado) {
+        this.estado = estado;
+    }
+
     public boolean isEstado2() {
         return estado2;
+    }
+
+    public void setEstado2(boolean estado) {
+        this.estado2 = estado;
     }
 }

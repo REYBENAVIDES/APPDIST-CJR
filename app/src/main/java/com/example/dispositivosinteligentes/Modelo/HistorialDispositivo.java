@@ -2,15 +2,15 @@ package com.example.dispositivosinteligentes.Modelo;
 
 public class HistorialDispositivo {
     private final int id_historial;
-    private final int id_dispositivo;
-    private final int id_usuario;
+    private final int dispositivo;
+    private final int usuario;
     private final String accion;
     private final String fecha;
 
     public HistorialDispositivo(int idHistorial, int idDispositivo, int idUsuario, String accion, String fecha) {
         this.id_historial = idHistorial;
-        this.id_dispositivo = idDispositivo;
-        this.id_usuario = idUsuario;
+        this.dispositivo = idDispositivo;
+        this.usuario = idUsuario;
         this.accion = accion;
         this.fecha = fecha;
     }
@@ -20,11 +20,11 @@ public class HistorialDispositivo {
     }
 
     public int getIdDispositivo() {
-        return id_dispositivo;
+        return dispositivo;
     }
 
     public int getIdUsuario() {
-        return id_usuario;
+        return usuario;
     }
 
     public String getAccion() {

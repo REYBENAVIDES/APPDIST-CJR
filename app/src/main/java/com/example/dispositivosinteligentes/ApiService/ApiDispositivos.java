@@ -16,18 +16,18 @@ import retrofit2.http.PUT;
 import retrofit2.http.Path;
 
 public interface ApiDispositivos {
-    @GET("dispositivos/") // Reemplazar url
+    @GET("/api/dispositivos") // Reemplazar url
     List<Dispositivo> get();
 
-    @GET("dispositivos/") // Reemplazar url
+    @GET("/api/dispositivos") // Reemplazar url
     Call<List<Dispositivo>> getCall();
 
-    @POST("dispositivos/")
-    Response<ResponseBody> post(@Body RequestBody requestBody);
+    @POST("/api/dispositivos")
+    Call<ResponseBody> post(@Body RequestBody requestBody);
 
-    @DELETE("dispositivos/{id}/")
-    Response<Void> delete(@Path("id") int id);
+    @DELETE("/api/dispositivos/{id}/")
+    Call<Void> delete(@Path("id") int id);
 
-    @PUT("dispositivos/{id}/")
-    Response<ResponseBody> put(@Path("id") int id, @Body RequestBody requestBody);
+    @PUT("/api/dispositivos/{id}/estado")
+    Call<Dispositivo> put(@Path("id") Long id, @Body boolean nuevoEstado);
 }

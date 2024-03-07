@@ -3,15 +3,15 @@ package com.example.dispositivosinteligentes.Modelo;
 public class Aula {
     private final int id_aula;
     private final String nombre;
-    private final int id_facultad;
+    private final Facultad facultad;
     private final boolean estado;
     private final int cantidad_dispositivos;
     private final int cantidad_dispositivos_activo;
 
-    public Aula(int id_aula, String nombre, int id_facultad, boolean estado, int cantidad_dispositivos, int cantidad_dispositivos_activo) {
+    public Aula(int id_aula, String nombre, Facultad facultad, boolean estado, int cantidad_dispositivos, int cantidad_dispositivos_activo) {
         this.id_aula = id_aula;
         this.nombre = nombre;
-        this.id_facultad = id_facultad;
+        this.facultad = facultad;
         this.estado = estado;
         this.cantidad_dispositivos = cantidad_dispositivos;
         this.cantidad_dispositivos_activo = cantidad_dispositivos_activo;
@@ -25,8 +25,8 @@ public class Aula {
         return nombre;
     }
 
-    public int getId_facultad() {
-        return id_facultad;
+    public Facultad getId_facultad() {
+        return facultad;
     }
 
     public boolean isEstado() {

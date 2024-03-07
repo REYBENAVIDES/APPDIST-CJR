@@ -28,6 +28,7 @@ import com.example.dispositivosinteligentes.Adaptador.FacultadAdapter;
 import com.example.dispositivosinteligentes.ApiService.ApiAula;
 import com.example.dispositivosinteligentes.ApiService.ApiUrl;
 import com.example.dispositivosinteligentes.Modelo.Aula;
+import com.example.dispositivosinteligentes.Modelo.Facultad;
 import com.google.android.material.textfield.TextInputLayout;
 
 import org.json.JSONException;
@@ -96,9 +97,10 @@ public class Activity_Aulas extends AppCompatActivity {
                 if (response.isSuccessful()) {
                     List<Aula> datos = response.body();
                     List<Aula> datosNuevo = new ArrayList<>();
+
                     if (datos != null) {
                         for (Aula itemDato : datos) {
-                            if (itemDato.getId_facultad() == idFacultad) {
+                            if (itemDato.getId_facultad().getId_facultad() == idFacultad) {
                                 datosNuevo.add(itemDato);
                             }
                         }
@@ -135,8 +137,6 @@ public class Activity_Aulas extends AppCompatActivity {
                         rcvAula.setAdapter(adapterAula);
                         Toast.makeText(getApplicationContext(), "Se actualizaron los datos", Toast.LENGTH_SHORT).show();
                     }
-                } else {
-
                 }
             }
 
@@ -172,9 +172,11 @@ public class Activity_Aulas extends AppCompatActivity {
             } else {
                 try {
                     int idFacultad = getIntent().getIntExtra("idFacultad", 0);
+                    JSONObject facultadJson = new JSONObject();
                     JSONObject jsonObject = new JSONObject();
+                    facultadJson.put("id_facultad", idFacultad);
                     jsonObject.put("nombre", txtNombre.getText().toString());
-                    jsonObject.put("id_facultad", idFacultad);
+                    jsonObject.put("facultad", facultadJson);
                     String jsonString = jsonObject.toString();
 
                     Retrofit retrofit = new Retrofit.Builder()

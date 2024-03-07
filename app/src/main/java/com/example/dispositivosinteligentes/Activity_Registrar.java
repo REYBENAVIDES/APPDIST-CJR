@@ -38,9 +38,11 @@ public class Activity_Registrar extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registrar);
 
+        TextInputLayout txtInputUsuario = findViewById(R.id.usuario_text_input_layout);
         TextInputLayout txtInputCorreo = findViewById(R.id.correo_text_input_layout);
         TextInputLayout txtInputClave = findViewById(R.id.clave_text_input_layout);
         TextInputLayout txtInputConfirmar = findViewById(R.id.claveConfirmar_text_input_layout);
+        TextView txtUsuario = findViewById(R.id.txtUsuario);
         TextView txtCorreo = findViewById(R.id.txtCorreo);
         TextView txtClave = findViewById(R.id.txtClave);
         TextView txtClaveConfirmar = findViewById(R.id.txtClaveConfirmar);
@@ -49,7 +51,15 @@ public class Activity_Registrar extends AppCompatActivity {
         btnRegistrar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (txtCorreo.getText().toString().isEmpty() || txtClave.getText().toString().isEmpty() || txtClaveConfirmar.getText().toString().isEmpty()) {
+                if (txtUsuario.getText().toString().isEmpty() || txtCorreo.getText().toString().isEmpty() || txtClave.getText().toString().isEmpty() || txtClaveConfirmar.getText().toString().isEmpty()) {
+                    if (txtUsuario.getText().toString().isEmpty()) {
+                        txtInputUsuario.setError("El campo no puede estar vacio");
+                        txtInputUsuario.setDefaultHintTextColor(ColorStateList.valueOf(Color.parseColor("#E91E63")));
+                    } else {
+                        txtInputCorreo.setError(null);
+                        txtInputCorreo.setDefaultHintTextColor(ColorStateList.valueOf(Color.parseColor("#007224")));
+                    }
+
                     if (txtCorreo.getText().toString().isEmpty()) {
                         txtInputCorreo.setError("El campo no puede estar vacio");
                         txtInputCorreo.setDefaultHintTextColor(ColorStateList.valueOf(Color.parseColor("#E91E63")));
@@ -82,6 +92,7 @@ public class Activity_Registrar extends AppCompatActivity {
                     } else {
                         JSONObject jsonObject = new JSONObject();
                         try {
+                            jsonObject.put("usuario", txtUsuario.getText().toString());
                             jsonObject.put("email", txtCorreo.getText().toString());
                             jsonObject.put("contraseña", txtClave.getText().toString());
                         } catch (JSONException e) {

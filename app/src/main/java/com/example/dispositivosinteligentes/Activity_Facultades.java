@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.Dialog;
+import android.content.Context;
 import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.graphics.Color;
@@ -51,13 +52,13 @@ public class Activity_Facultades extends AppCompatActivity {
     private FacultadAdapter adapterFacultad;
     private String rutaImagen = "";
     private ImageView foto;
-    private int id_cliente = 0;
+    private int id_usuario = 0;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_facultades);
 
-        id_cliente = getIntent().getIntExtra("id_cliente", 0);
+        id_usuario = getIntent().getIntExtra("id_cliente", 0);
 
         rcvFacultad = findViewById(R.id.rcvDispositivos);
         rcvFacultad.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
@@ -112,6 +113,9 @@ public class Activity_Facultades extends AppCompatActivity {
                                         } else if (menuItem.getItemId() == R.id.op_eliminar) {
                                             showDialogEliminar(facultad.getId_facultad(), facultad.getNombre());
                                             return true;
+                                        } else if (menuItem.getItemId() == R.id.op_compartir) {
+                                            showDialogCompartir();
+                                            return true;
                                         } else {
                                             return false;
                                         }
@@ -120,7 +124,7 @@ public class Activity_Facultades extends AppCompatActivity {
                                 } else {
                                     Intent intent = new Intent(getApplicationContext(), Activity_Aulas.class);
                                     intent.putExtra("idFacultad", facultad.getId_facultad());
-                                    intent.putExtra("id_cliente", id_cliente);
+                                    intent.putExtra("id_cliente", id_usuario);
                                     startActivity(intent);
                                 }
                             }
@@ -168,8 +172,10 @@ public class Activity_Facultades extends AppCompatActivity {
             } else {
                 JSONObject jsonObject = new JSONObject();
                 try {
+                    JSONObject usuarioJson = new JSONObject();
+                    usuarioJson.put("id_usuario", id_usuario);
                     jsonObject.put("nombre", txtNombre.getText().toString());
-                    String jsonString = jsonObject.toString();
+                    jsonObject.put("usuario", usuarioJson);
 
                     RequestBody requestBody = RequestBody.create(MediaType.parse("application/json"), jsonObject.toString());
 
@@ -286,4 +292,17 @@ public class Activity_Facultades extends AppCompatActivity {
 
         dialog.show();
     }
+
+    private void showDialogCompartir() {
+        Dialog dialog = new Dialog(this);
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.setCancelable(true);
+        dialog.setContentView(R.layout.dialog_facultad_compartir);
+        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        dialog.getWindow().setLayout(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.WRAP_CONTENT);
+        TextView txtEncabezado = dialog.findViewById(R.id.txtEncabezadoDialog);
+
+        dialog.show();
+    }
+
 }

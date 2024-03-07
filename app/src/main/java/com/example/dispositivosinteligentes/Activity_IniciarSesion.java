@@ -73,9 +73,13 @@ public class Activity_IniciarSesion extends AppCompatActivity {
                                     List<Usuario> usuarios = response.body();
                                     boolean comprobar = false;
                                     int id_usuario = 0;
+                                    String n_usuario = "";
+                                    String correo = "";
                                     for (Usuario usuario : usuarios) {
                                         if(usuario.getEmail().equals(txtCorreo.getText().toString()) && usuario.getContraseña().equals(txtClave.getText().toString())){
                                             id_usuario = usuario.getIdUsuario();
+                                            n_usuario = usuario.getUsuario();
+                                            correo = usuario.getEmail();
                                             comprobar = true;
                                         }
                                     }
@@ -83,6 +87,8 @@ public class Activity_IniciarSesion extends AppCompatActivity {
                                         Toast.makeText(getApplicationContext(),"Bienvenido", Toast.LENGTH_LONG).show();
                                         Intent intent = new Intent(getApplicationContext(), Activity_Facultades.class);
                                         intent.putExtra("id_cliente", id_usuario);
+                                        intent.putExtra("usuario", n_usuario);
+                                        intent.putExtra("correo", correo);
                                         startActivity(intent);
                                     }else{
                                         TextView txtError = findViewById(R.id.txterror);

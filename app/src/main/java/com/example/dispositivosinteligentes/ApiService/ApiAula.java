@@ -13,15 +13,15 @@ import retrofit2.http.Path;
 import java.util.List;
 
 public interface ApiAula {
-    @GET("aulas/") // Reemplazar url
+    @GET("/api/aulas") // Reemplazar url
     List<Aula> get();
 
-    @GET("aulas/") // Reemplazar url
+    @GET("/api/aulas") // Reemplazar url
     Call<List<Aula>> getCall();
 
-    @POST("aulas/")
+    @POST("/api/aulas")
     Call<ResponseBody> post(@Body RequestBody requestBody);
 
-    @DELETE("aulas/{id}/")
+    @DELETE("/api/aulas/{id}")
     Call<Void> delete(@Path("id") int id);
 }

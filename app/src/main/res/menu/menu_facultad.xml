@@ -4,8 +4,9 @@
     <item
         android:id="@+id/op_detalle"
         android:title="Ver detalle"/>
-
-
+    <item
+        android:id="@+id/op_compartir"
+        android:title="Compartir"/>
     <item
         android:id="@+id/op_eliminar"
         android:title="Eliminar"/>

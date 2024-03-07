@@ -1,44 +1,50 @@
 package com.example.dispositivosinteligentes.ApiService;
 
+import com.example.dispositivosinteligentes.Modelo.Command;
+
 import okhttp3.ResponseBody;
+import retrofit2.Call;
 import retrofit2.Response;
+import retrofit2.http.Body;
+import retrofit2.http.Headers;
 import retrofit2.http.POST;
+import retrofit2.http.Path;
 
 public interface ApiDispositivoTuya {
 
     @POST("breake_encendido/")
-    Response<ResponseBody> offBreake();
+    Call<ResponseBody> offBreake();
 
     @POST("breake_apagado/")
-    Response<ResponseBody> onBreake();
+    Call<ResponseBody> onBreake();
 
     @POST("switch_1_encendido/")
-    Response<ResponseBody> offSwitch1();
+    Call<ResponseBody> offSwitch1();
 
     @POST("switch_1_apagado/")
-    Response<ResponseBody> onSwitch1();
+    Call<ResponseBody> onSwitch1();
 
     @POST("switch_2_encendido/")
-    Response<ResponseBody> offSwitch2();
+    Call<ResponseBody> offSwitch2();
 
     @POST("switch_2_apagado/")
-    Response<ResponseBody> onSwitch2();
+    Call<ResponseBody> onSwitch2();
 
     @POST("tomacorriente_1_encendido/")
-    Response<ResponseBody> offToma1();
+    Call<ResponseBody> offToma1();
 
     @POST("tomacorriente_2_encendido/")
-    Response<ResponseBody> offToma2();
+    Call<ResponseBody> offToma2();
 
     @POST("tomacorriente_1_apagado/")
-    Response<ResponseBody> onToma1();
+    Call<ResponseBody> onToma1();
 
     @POST("tomacorriente_2_apagado/")
-    Response<ResponseBody> onToma2();
+    Call<ResponseBody> onToma2();
 
     @POST("smart_touch_apagado/")
-    Response<ResponseBody> onWifi();
+    Call<ResponseBody> onWifi();
 
     @POST("smart_touch_encendido/")
-    Response<ResponseBody> offWifi();
+    Call<ResponseBody> offWifi();
 }
