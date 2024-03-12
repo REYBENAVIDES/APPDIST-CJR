@@ -8,7 +8,20 @@ android {
     compileSdk 33
 
     packagingOptions {
-        pickFirst 'lib/*/libc++_shared.so' // Un archivo Android Archive (AAR) contiene una biblioteca de Android. Si el archivo .so existe en varios archivos AAR, selecciona el primer archivo AAR.
+        pickFirst 'lib/*/libc++_shared.so' //
+        pickFirst 'lib/*/libyuv.so'
+        pickFirst 'lib/*/libopenh264.so'
+        exclude 'META-INF/LICENSE.md'
+        excludes += [
+                'META-INF/LICENSE.md',
+                'META-INF/LICENSE',
+                'META-INF/LICENSE.txt',
+                'META-INF/NOTICE.md',
+                'META-INF/NOTICE',
+                'META-INF/NOTICE.txt',
+                'META-INF/DEPENDENCIES',
+                'META-INF/DEPENDENCIES.txt'
+        ]
     }
 
     signingConfigs {
@@ -92,4 +105,6 @@ dependencies {
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.5'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
+
+    implementation 'com.sun.mail:android-mail:1.6.7'
 }

@@ -9,6 +9,10 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.thingclips.smart.android.user.api.ILoginCallback;
+import com.thingclips.smart.android.user.bean.User;
+import com.thingclips.smart.home.sdk.ThingHomeSdk;
 import com.uteq.dispositivos.ApiService.ApiUrl;
 import com.uteq.dispositivos.ApiService.ApiUsuario;
 import com.uteq.dispositivos.Modelo.Usuario;
@@ -66,51 +70,64 @@ public class Activity_IniciarSesion extends AppCompatActivity {
                         claveTextInputLayout.setDefaultHintTextColor(ColorStateList.valueOf(Color.parseColor("#007224")));
                     }
                 } else {
-                    Call<List<Usuario>> call = apiService.get();
-                    call.enqueue(new Callback<List<Usuario>>() {
+                    //Iniciar sesion
+                    ThingHomeSdk.getUserInstance().loginWithEmail("593", txtCorreo.getText().toString(), txtClave.getText().toString(), new ILoginCallback() {
                         @Override
-                        public void onResponse(Call<List<Usuario>> call, Response<List<Usuario>> response) {
-                            if (response.isSuccessful()) {
-                                try {
-                                    List<Usuario> usuarios = response.body();
-                                    boolean comprobar = false;
-                                    int id_usuario = 0;
-                                    String n_usuario = "";
-                                    String correo = "";
-                                    for (Usuario usuario : usuarios) {
-                                        if(usuario.getEmail().equals(txtCorreo.getText().toString()) && usuario.getContraseña().equals(txtClave.getText().toString())){
-                                            id_usuario = usuario.getIdUsuario();
-                                            n_usuario = usuario.getUsuario();
-                                            correo = usuario.getEmail();
-                                            comprobar = true;
+                        public void onSuccess(User user) {
+                            Call<List<Usuario>> call = apiService.get();
+                            call.enqueue(new Callback<List<Usuario>>() {
+                                @Override
+                                public void onResponse(Call<List<Usuario>> call, Response<List<Usuario>> response) {
+                                    if (response.isSuccessful()) {
+                                        try {
+                                            List<Usuario> usuarios = response.body();
+                                            boolean comprobar = false;
+                                            int id_usuario = 0;
+                                            String n_usuario = "";
+                                            String correo = "";
+                                            for (Usuario usuario : usuarios) {
+                                                if(usuario.getEmail().equals(txtCorreo.getText().toString()) && usuario.getContraseña().equals(txtClave.getText().toString())){
+                                                    id_usuario = usuario.getIdUsuario();
+                                                    n_usuario = usuario.getUsuario();
+                                                    correo = usuario.getEmail();
+                                                    comprobar = true;
+                                                }
+                                            }
+                                            if (comprobar){
+                                                Toast.makeText(getApplicationContext(),"Bienvenido", Toast.LENGTH_LONG).show();
+                                                Intent intent = new Intent(getApplicationContext(), Activity_Facultades.class);
+                                                intent.putExtra("id_cliente", id_usuario);
+                                                intent.putExtra("usuario", n_usuario);
+                                                intent.putExtra("correo", correo);
+                                                startActivity(intent);
+                                            }else{
+                                                TextView txtError = findViewById(R.id.txterror);
+                                                txtError.setVisibility(View.VISIBLE);
+                                            }
+                                            txtProbar.setText(usuarios.toString());
+                                        } catch (Exception e) {
+                                            e.printStackTrace();
                                         }
+
+                                    } else {
+                                        // Manejar errores de respuesta
                                     }
-                                    if (comprobar){
-                                        Toast.makeText(getApplicationContext(),"Bienvenido", Toast.LENGTH_LONG).show();
-                                        Intent intent = new Intent(getApplicationContext(), Activity_Facultades.class);
-                                        intent.putExtra("id_cliente", id_usuario);
-                                        intent.putExtra("usuario", n_usuario);
-                                        intent.putExtra("correo", correo);
-                                        startActivity(intent);
-                                    }else{
-                                        TextView txtError = findViewById(R.id.txterror);
-                                        txtError.setVisibility(View.VISIBLE);
-                                    }
-                                    txtProbar.setText(usuarios.toString());
-                                } catch (Exception e) {
-                                    e.printStackTrace();
                                 }
 
-                            } else {
-                                // Manejar errores de respuesta
-                            }
+                                @Override
+                                public void onFailure(Call<List<Usuario>> call, Throwable t) {
+                                    // Manejar errores de red o de conexión
+                                }
+                            });
                         }
 
                         @Override
-                        public void onFailure(Call<List<Usuario>> call, Throwable t) {
-                            // Manejar errores de red o de conexión
+                        public void onError(String code, String error) {
+                            Toast.makeText(getApplicationContext(), "code: " + code + "error:" + error, Toast.LENGTH_SHORT).show();
                         }
                     });
+
+
                 }
             }
         });
