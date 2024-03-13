@@ -5,19 +5,23 @@ public class Dispositivo {
     private final int id_dispositivo;
     private final Aula aula;
     private final String nombre;
+    private final String devId;
     private final String marca;
     private final String modelo;
     private boolean estado;
     private boolean estado2 = false;
 
-    public Dispositivo(int idDispositivo, Aula idAula, String nombre, String marca, String modelo, boolean estado) {
+    public Dispositivo(int idDispositivo, Aula idAula, String nombre, String devId, String marca, String modelo, boolean estado) {
         this.id_dispositivo = idDispositivo;
         this.aula = idAula;
         this.nombre = nombre;
+        this.devId = devId;
         this.marca = marca;
         this.modelo = modelo;
         this.estado = estado;
     }
+
+    public String getDevId() { return devId; }
 
     public int getIdDispositivo() {
         return id_dispositivo;

@@ -4,7 +4,10 @@ import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.view.View;
+import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -13,12 +16,15 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.thingclips.smart.android.user.api.ILoginCallback;
 import com.thingclips.smart.android.user.bean.User;
 import com.thingclips.smart.home.sdk.ThingHomeSdk;
+import com.thingclips.smart.home.sdk.bean.HomeBean;
+import com.thingclips.smart.home.sdk.callback.IThingHomeResultCallback;
 import com.uteq.dispositivos.ApiService.ApiUrl;
 import com.uteq.dispositivos.ApiService.ApiUsuario;
 import com.uteq.dispositivos.Modelo.Usuario;
 import com.google.android.material.textfield.TextInputLayout;
 import com.uteq.dispositivos.R;
 
+import java.util.ArrayList;
 import java.util.List;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -33,6 +39,14 @@ public class Activity_IniciarSesion extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_iniciar_sesion);
+
+        String[] language ={"aC","aC++","aJava","a.NET","iPhone","Android","ASP.NET","PHP"};
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,android.R.layout.select_dialog_item,language);
+        //Getting the instance of AutoCompleteTextView
+        AutoCompleteTextView actv =  (AutoCompleteTextView)findViewById(R.id.txtAutoProbar);
+        actv.setThreshold(1);//will start working from first character
+        actv.setAdapter(adapter);//setting the adapter data into the AutoCompleteTextView
+        actv.setTextColor(Color.RED);
 
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(ApiUrl.urlUbicMedic)
@@ -85,6 +99,7 @@ public class Activity_IniciarSesion extends AppCompatActivity {
                                             int id_usuario = 0;
                                             String n_usuario = "";
                                             String correo = "";
+                                            String[] correos = new String[usuarios.size()];
                                             for (Usuario usuario : usuarios) {
                                                 if(usuario.getEmail().equals(txtCorreo.getText().toString()) && usuario.getContraseña().equals(txtClave.getText().toString())){
                                                     id_usuario = usuario.getIdUsuario();
@@ -94,12 +109,26 @@ public class Activity_IniciarSesion extends AppCompatActivity {
                                                 }
                                             }
                                             if (comprobar){
-                                                Toast.makeText(getApplicationContext(),"Bienvenido", Toast.LENGTH_LONG).show();
-                                                Intent intent = new Intent(getApplicationContext(), Activity_Facultades.class);
-                                                intent.putExtra("id_cliente", id_usuario);
-                                                intent.putExtra("usuario", n_usuario);
-                                                intent.putExtra("correo", correo);
-                                                startActivity(intent);
+                                                int finalId_usuario = id_usuario;
+                                                String finalN_usuario = n_usuario;
+                                                String finalCorreo = correo;
+                                                ThingHomeSdk.newHomeInstance(190971144).getHomeDetail(new IThingHomeResultCallback() {
+                                                    @Override
+                                                    public void onSuccess(HomeBean homeBean) {
+                                                        Toast.makeText(getApplicationContext(),"Bienvenido", Toast.LENGTH_LONG).show();
+                                                        Intent intent = new Intent(getApplicationContext(), Activity_Facultades.class);
+                                                        intent.putExtra("id_cliente", finalId_usuario);
+                                                        intent.putExtra("usuario", finalN_usuario);
+                                                        intent.putExtra("correo", finalCorreo);
+                                                        startActivity(intent);
+                                                    }
+
+                                                    @Override
+                                                    public void onError(String errorCode, String errorMsg) {
+
+                                                    }
+                                                });
+
                                             }else{
                                                 TextView txtError = findViewById(R.id.txterror);
                                                 txtError.setVisibility(View.VISIBLE);
@@ -116,7 +145,8 @@ public class Activity_IniciarSesion extends AppCompatActivity {
 
                                 @Override
                                 public void onFailure(Call<List<Usuario>> call, Throwable t) {
-                                    // Manejar errores de red o de conexión
+                                    TextView txtError = findViewById(R.id.txterror);
+                                    txtError.setVisibility(View.VISIBLE);
                                 }
                             });
                         }

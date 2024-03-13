@@ -34,8 +34,8 @@
                 android:textStyle="bold" />
         </LinearLayout>
 
-        <EditText
-            android:id="@+id/editTextAgregarPersona"
+        <AutoCompleteTextView
+            android:id="@+id/txtAgregarPersona"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="24dp"
@@ -98,7 +98,7 @@
             android:textSize="14sp" />
 
         <Button
-            android:id="@+id/btnAgregarDialog"
+            android:id="@+id/btnCompartirDialog"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="24dp"

@@ -57,7 +57,7 @@ public class DispositivoAdapter extends RecyclerView.Adapter<DispositivoAdapter.
 
         if (dispositivo.getModelo().equals("Tomacorriente")) {
             holder.foto.setImageResource(R.drawable.dispositivo_tomacorriente);
-        } else if (dispositivo.getModelo().equals("ON_I_OFF_1") || dispositivo.getModelo().equals("ON_I_OFF_2")) {
+        } else if (dispositivo.getModelo().equals("wf_ble_cz")) {
             holder.foto.setImageResource(R.drawable.dispositivo_switch);
         } else if (dispositivo.getModelo().equals("IOT-BASED")) {
             holder.foto.setImageResource(R.drawable.dispositivo_breaker);

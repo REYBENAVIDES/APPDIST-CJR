@@ -22,6 +22,7 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.thingclips.sdk.home.bean.InviteMessageBean;
 import com.thingclips.smart.android.user.api.ILoginCallback;
 import com.thingclips.smart.android.user.bean.User;
 import com.thingclips.smart.home.sdk.ThingHomeSdk;
@@ -151,6 +152,19 @@ public class Activity_Bienvenida extends AppCompatActivity {
 
         ThingHomeSdk.init(getApplication(), "fqkatyqm49kdjn5u8t9w", "sfa3qsqvh9fs987ahc345qj4ej9u8yfm");
 
+        /*ThingHomeSdk.getMemberInstance().getInvitationMessage(190971144, new IThingDataCallback<InviteMessageBean>() {
+            @Override
+            public void onSuccess(InviteMessageBean result) {
+                Toast.makeText(getApplicationContext(),"code: " + result.getInvitationCode(), Toast.LENGTH_LONG).show();
+                Log.i("code: ",result.getInvitationCode());
+            }
+
+            @Override
+            public void onError(String errorCode, String errorMessage) {
+                // onErr
+            }
+        });*/
+
         /*Enviar_Correo enviar = new Enviar_Correo("ereyb@uteq.edu.ec","eduinrey12@gmail.com","Verificacion","Probando el contenido");
         enviar.execute();*/
 
@@ -170,7 +184,7 @@ public class Activity_Bienvenida extends AppCompatActivity {
         });*/
 
         //Listado de hogares
-        ThingHomeSdk.getHomeManagerInstance().queryHomeList(new IThingGetHomeListCallback() {
+        /*ThingHomeSdk.getHomeManagerInstance().queryHomeList(new IThingGetHomeListCallback() {
             @Override
             public void onSuccess(List<HomeBean> homeBeans) {
                 Toast.makeText(getApplicationContext(), "Todo correcto2", Toast.LENGTH_SHORT).show();
@@ -183,7 +197,7 @@ public class Activity_Bienvenida extends AppCompatActivity {
             public void onError(String errorCode, String error) {
                 Toast.makeText(getApplicationContext(),"Error: " + errorCode,Toast.LENGTH_LONG).show();
             }
-        });
+        });*/
 
 
 
@@ -197,50 +211,9 @@ public class Activity_Bienvenida extends AppCompatActivity {
         btnIniciar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                /*Intent intent = new Intent(Activity_Bienvenida.this, Activity_IniciarSesion.class);
-                startActivity(intent);*/
-                ThingHomeSdk.getActivatorInstance().getActivatorToken(190971144,
-                        new IThingActivatorGetToken() {
-                            @Override
-                            public void onSuccess(String token) {
-                                Toast.makeText(getApplicationContext(),"Token: " + token, Toast.LENGTH_LONG).show();
+                Intent intent = new Intent(Activity_Bienvenida.this, Activity_IniciarSesion.class);
+                startActivity(intent);
 
-                                ActivatorBuilder builder = new ActivatorBuilder()
-                                        .setSsid("NETLIFE-BENAVIDES")
-                                        .setContext(context)
-                                        .setPassword("#HAEDLUJALU2020")
-                                        .setActivatorModel(ActivatorModelEnum.THING_EZ)
-                                        .setTimeOut(20000)
-                                        .setToken(token)
-                                        .setListener(new IThingSmartActivatorListener() {
-
-                                                         @Override
-                                                         public void onError(String errorCode, String errorMsg) {
-                                                             Toast.makeText(context,"Error Facil: " + errorCode, Toast.LENGTH_LONG).show();
-
-                                                         }
-
-                                                         @Override
-                                                         public void onActiveSuccess(DeviceBean devResp) {
-                                                             Toast.makeText(context,"ID2: " + devResp.devId, Toast.LENGTH_LONG).show();
-                                                         }
-
-                                                         @Override
-                                                         public void onStep(String step, Object data) {
-
-                                                         }
-                                                     }
-                                        );
-                                IThingActivator mThingActivator = ThingHomeSdk.getActivatorInstance().newMultiActivator(builder);
-                                mThingActivator.start();
-
-                            }
-
-                            @Override
-                            public void onFailure(String s, String s1) {
-
-                            }
-                        });
             }
         });
 

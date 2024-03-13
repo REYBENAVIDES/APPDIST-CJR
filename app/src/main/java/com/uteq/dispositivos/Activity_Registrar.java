@@ -184,9 +184,20 @@ public class Activity_Registrar extends AppCompatActivity {
                                         @Override
                                         public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                                             if (response.isSuccessful()) {
-                                                Toast.makeText(getApplicationContext(),"Se registro correctamente",Toast.LENGTH_LONG).show();
-                                                Intent intent = new Intent(getApplicationContext(), Activity_IniciarSesion.class);
-                                                startActivity(intent);
+                                                ThingHomeSdk.getHomeManagerInstance().joinHomeByInviteCode("39JJUC" , new IResultCallback() {
+                                                    @Override
+                                                    public void onError(String code, String error) {
+
+                                                    }
+
+                                                    @Override
+                                                    public void onSuccess() {
+                                                        Toast.makeText(getApplicationContext(),"Se registro correctamente",Toast.LENGTH_LONG).show();
+                                                        Intent intent = new Intent(getApplicationContext(), Activity_IniciarSesion.class);
+                                                        startActivity(intent);
+                                                    }
+                                                });
+
                                             } else {
                                                 // La solicitud no fue exitosa
                                                 // Aquí puedes manejar el error si es necesario

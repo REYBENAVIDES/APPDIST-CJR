@@ -83,6 +83,7 @@ dependencies {
     implementation fileTree(dir: 'libs', include: ['*.aar'])
     implementation 'com.alibaba:fastjson:1.1.67.android'
     implementation 'com.squareup.okhttp3:okhttp-urlconnection:3.14.9'
+    implementation 'com.airbnb.android:lottie:4.1.0'
 
     // The latest stable App SDK for Android.
     implementation 'com.facebook.soloader:soloader:0.10.4+'

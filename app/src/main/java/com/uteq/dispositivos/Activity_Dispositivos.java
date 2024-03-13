@@ -26,6 +26,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.airbnb.lottie.LottieAnimationView;
+import com.thingclips.smart.sdk.api.IThingDevice;
 import com.uteq.dispositivos.Adaptador.DispositivoAdapter;
 import com.uteq.dispositivos.ApiService.ApiDispositivoHistorial;
 import com.uteq.dispositivos.ApiService.ApiDispositivoTuya;
@@ -67,6 +68,7 @@ public class Activity_Dispositivos extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dispositivos);
 
+        int idAula = getIntent().getIntExtra("idAula", 0);
         int clientId = getIntent().getIntExtra("id_cliente", 0);
 
         rcvDispositivo = findViewById(R.id.rcvDispositivos);
@@ -75,11 +77,12 @@ public class Activity_Dispositivos extends AppCompatActivity {
         actualizarDatos();
 
         ImageButton btnAgregar = findViewById(R.id.btnAgregarDispositivo);
-        btnAgregar.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                showDialogAgregarDispositivos();
-            }
+        btnAgregar.setOnClickListener(view -> {
+            //showDialogAgregarDispositivos();
+            Intent intent = new Intent(getApplicationContext(), Activity_DispositivoAgregar.class);
+            intent.putExtra("idAula", idAula);
+            intent.putExtra("id_cliente", id_cliente);
+            startActivity(intent);
         });
 
         ImageButton btnActualizar = findViewById(R.id.btnActualizar);
@@ -95,6 +98,8 @@ public class Activity_Dispositivos extends AppCompatActivity {
         animationView.loop(true);
         animationView.playAnimation();
         animationView.setVisibility(View.GONE);
+
+        //IThingDevice mDevice = ThingHomeSdk.newDeviceInstance(deviceBean.getDevId());
 
     }
 
