@@ -34,10 +34,12 @@ import com.thingclips.smart.home.sdk.callback.IThingGetHomeListCallback;
 import com.thingclips.smart.home.sdk.callback.IThingHomeResultCallback;
 import com.thingclips.smart.home.sdk.callback.IThingResultCallback;
 import com.thingclips.smart.interior.device.bean.DevResp;
+import com.thingclips.smart.sdk.api.IDevListener;
 import com.thingclips.smart.sdk.api.IResultCallback;
 import com.thingclips.smart.sdk.api.IThingActivator;
 import com.thingclips.smart.sdk.api.IThingActivatorGetToken;
 import com.thingclips.smart.sdk.api.IThingDataCallback;
+import com.thingclips.smart.sdk.api.IThingDevice;
 import com.thingclips.smart.sdk.api.IThingOptimizedActivator;
 import com.thingclips.smart.sdk.api.IThingSmartActivatorListener;
 import com.thingclips.smart.sdk.api.IThingUser;
@@ -151,6 +153,9 @@ public class Activity_Bienvenida extends AppCompatActivity {
         }
 
         ThingHomeSdk.init(getApplication(), "fqkatyqm49kdjn5u8t9w", "sfa3qsqvh9fs987ahc345qj4ej9u8yfm");
+
+
+
 
         /*ThingHomeSdk.getMemberInstance().getInvitationMessage(190971144, new IThingDataCallback<InviteMessageBean>() {
             @Override

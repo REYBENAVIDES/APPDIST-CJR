@@ -61,7 +61,7 @@ public class DispositivoAdapter extends RecyclerView.Adapter<DispositivoAdapter.
             holder.foto.setImageResource(R.drawable.dispositivo_switch);
         } else if (dispositivo.getModelo().equals("IOT-BASED")) {
             holder.foto.setImageResource(R.drawable.dispositivo_breaker);
-        } else if (dispositivo.getModelo().equals("Smart Touch")) {
+        } else if (dispositivo.getModelo().equals("wf_ble_kg")) {
             holder.foto.setImageResource(R.drawable.dispositivo_touch);
         }
 

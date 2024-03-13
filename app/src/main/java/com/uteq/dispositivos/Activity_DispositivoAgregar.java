@@ -123,6 +123,8 @@ public class Activity_DispositivoAgregar extends AppCompatActivity {
                                                              imagen.setVisibility(View.VISIBLE);
                                                              if("wf_ble_cz".equals(txtCategoria.getText().toString())){
                                                                  imagen.setImageResource(R.drawable.dispositivo_switch);
+                                                             }else if("wf_ble_kg".equals(txtCategoria.getText().toString())){
+                                                                 imagen.setImageResource(R.drawable.dispositivo_touch);
                                                              }
                                                              llEscanear.setVisibility(View.VISIBLE);
                                                              btnContinuar.setText("Agregar");
