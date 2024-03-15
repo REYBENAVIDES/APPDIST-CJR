@@ -55,7 +55,7 @@ public class DispositivoAdapter extends RecyclerView.Adapter<DispositivoAdapter.
             return true;
         });
 
-        if (dispositivo.getModelo().equals("Tomacorriente")) {
+        if (dispositivo.getModelo().equals("wf_cz")) {
             holder.foto.setImageResource(R.drawable.dispositivo_tomacorriente);
         } else if (dispositivo.getModelo().equals("wf_ble_cz")) {
             holder.foto.setImageResource(R.drawable.dispositivo_switch);
@@ -65,7 +65,7 @@ public class DispositivoAdapter extends RecyclerView.Adapter<DispositivoAdapter.
             holder.foto.setImageResource(R.drawable.dispositivo_touch);
         }
 
-        if (!dispositivo.getModelo().equals("Tomacorriente")) {
+        if (!dispositivo.getModelo().equals("wf_cz")) {
             ImageButton estado = holder.itemView.findViewById(R.id.btnBloquearDispositivo);
             ImageView bloqueo = holder.itemView.findViewById(R.id.imgBloqueo);
             bloqueo.setVisibility(View.GONE);
@@ -108,7 +108,7 @@ public class DispositivoAdapter extends RecyclerView.Adapter<DispositivoAdapter.
     @Override
     public int getItemViewType(int position) {
         Dispositivo dispositivo = dispositivos.get(position);
-        return !"Tomacorriente".equals(dispositivo.getModelo()) ? 1 : 2;
+        return !"wf_cz".equals(dispositivo.getModelo()) ? 1 : 2;
     }
 
     @Override

@@ -115,20 +115,45 @@ public class Activity_DispositivoAgregar extends AppCompatActivity {
 
                                                          @Override
                                                          public void onActiveSuccess(DeviceBean devResp) {
-                                                             animationView.setVisibility(View.GONE);
-                                                             txtpaso.setText("Dispositivo dectectado");
-                                                             txtpasoSub.setText("Se dectecto un dispositivo. Verifique la informacion para continuar");
-                                                             txtCategoria.setText(devResp.getCategoryCode());
-                                                             devId = devResp.devId;
-                                                             imagen.setVisibility(View.VISIBLE);
-                                                             if("wf_ble_cz".equals(txtCategoria.getText().toString())){
-                                                                 imagen.setImageResource(R.drawable.dispositivo_switch);
-                                                             }else if("wf_ble_kg".equals(txtCategoria.getText().toString())){
-                                                                 imagen.setImageResource(R.drawable.dispositivo_touch);
+                                                             try {
+                                                                 Retrofit retrofit = new Retrofit.Builder()
+                                                                         .baseUrl(ApiUrl.urlUbicMedic)
+                                                                         .addConverterFactory(GsonConverterFactory.create())
+                                                                         .build();
+
+                                                                 ApiDispositivos apiService = retrofit.create(ApiDispositivos.class);
+                                                                 Call<Void> call_put = apiService.deleteDevId(devResp.devId);
+                                                                 call_put.enqueue(new Callback<Void>() {
+                                                                     @Override
+                                                                     public void onResponse(Call<Void> call, Response<Void> response) {
+                                                                         animationView.setVisibility(View.GONE);
+                                                                         txtpaso.setText("Dispositivo dectectado");
+                                                                         txtpasoSub.setText("Se dectecto un dispositivo. Verifique la informacion para continuar");
+                                                                         txtCategoria.setText(devResp.getCategoryCode());
+                                                                         devId = devResp.devId;
+                                                                         imagen.setVisibility(View.VISIBLE);
+                                                                         if("wf_ble_cz".equals(txtCategoria.getText().toString())){
+                                                                             imagen.setImageResource(R.drawable.dispositivo_switch);
+                                                                         }else if("wf_ble_kg".equals(txtCategoria.getText().toString())){ //wf_ble_kg
+                                                                             imagen.setImageResource(R.drawable.dispositivo_touch);
+                                                                         }else if("wf_cz".equals(txtCategoria.getText().toString())) {
+                                                                             imagen.setImageResource(R.drawable.dispositivo_tomacorriente);
+                                                                         }
+                                                                         llEscanear.setVisibility(View.VISIBLE);
+                                                                         btnContinuar.setText("Agregar");
+                                                                         paso = 3;
+                                                                     }
+                                                                     @Override
+                                                                     public void onFailure(Call<Void> call, Throwable t) {
+                                                                         // Ocurrió un error de red o de conexión
+                                                                         // Aquí puedes manejar el error si es necesario
+                                                                     }
+                                                                 });
+
+                                                             } catch (Exception e) {
+                                                                 // Handle exception
                                                              }
-                                                             llEscanear.setVisibility(View.VISIBLE);
-                                                             btnContinuar.setText("Agregar");
-                                                             paso = 3;
+
                                                          }
 
                                                          @Override
@@ -175,7 +200,7 @@ public class Activity_DispositivoAgregar extends AppCompatActivity {
                         public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                             if (response.isSuccessful()) {
                                 Toast.makeText(getApplicationContext(), "Se registro correctamente", Toast.LENGTH_LONG).show();
-
+                                finish();
                             } else {
                                 // Handle unsuccessful response
                             }

@@ -24,8 +24,11 @@ public interface ApiDispositivos {
     @POST("/api/dispositivos")
     Call<ResponseBody> post(@Body RequestBody requestBody);
 
-    @DELETE("/api/dispositivos/{id}/")
+    @DELETE("/api/dispositivos/delete/{id}")
     Call<Void> delete(@Path("id") int id);
+
+    @DELETE("/api/dispositivos/{devId}")
+    Call<Void> deleteDevId(@Path("devId") String devId);
 
     @PUT("/api/dispositivos/{id}/estado")
     Call<Dispositivo> put(@Path("id") Long id, @Body boolean nuevoEstado);

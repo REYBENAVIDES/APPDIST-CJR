@@ -55,6 +55,8 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
+
+
 public class Activity_Dispositivos extends AppCompatActivity {
 
 
@@ -64,6 +66,11 @@ public class Activity_Dispositivos extends AppCompatActivity {
     private ImageView foto;
     private LottieAnimationView animationView;
     private int id_cliente = 0;
+
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -159,45 +166,21 @@ public class Activity_Dispositivos extends AppCompatActivity {
                                         IThingDevice mDevice = ThingHomeSdk.newDeviceInstance(dispositivo.getDevId());
 
                                         if (dispositivo.isEstado()) {
-                                            if (dispositivo.getModelo().equals("IOT-BASED")) {
-                                                try {
-                                                    dispositivo.setEstado(!dispositivo.isEstado());
-                                                    Call<ResponseBody> call_api = apiServiceTuya.onBreake();
-                                                    call_api.enqueue(new Callback<ResponseBody>() {
-                                                        @Override
-                                                        public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                                                            if (response.isSuccessful()) {
-                                                                //Toast.makeText(getApplicationContext(), "Se registro correctamente", Toast.LENGTH_LONG).show();
-                                                            } else {
-                                                                // Handle unsuccessful response
-                                                            }
-                                                        }
-                                                        @Override
-                                                        public void onFailure(Call<ResponseBody> call, Throwable t) {
-                                                            // Ocurrió un error de red o de conexión
-                                                            // Aquí puedes manejar el error si es necesario
-                                                        }
-                                                    });
-                                                } catch (Exception e) {
-                                                    Toast.makeText(getApplicationContext(), e.getMessage().toString(), Toast.LENGTH_LONG).show();
-                                                }
-                                            } else {
-                                                try {
-                                                    dispositivo.setEstado(!dispositivo.isEstado());
-                                                    mDevice.publishDps("{\"1\": false}", new IResultCallback() {
-                                                        @Override
-                                                        public void onError(String code, String error) {
-                                                            //Toast.makeText(getApplicationContext(), "Failed to switch on the light.", Toast.LENGTH_SHORT).show();
-                                                        }
+                                            try {
+                                                dispositivo.setEstado(!dispositivo.isEstado());
+                                                mDevice.publishDps("{\"1\": false}", new IResultCallback() {
+                                                    @Override
+                                                    public void onError(String code, String error) {
+                                                        //Toast.makeText(getApplicationContext(), "Failed to switch on the light.", Toast.LENGTH_SHORT).show();
+                                                    }
 
-                                                        @Override
-                                                        public void onSuccess() {
-                                                            //Toast.makeText(getApplicationContext(), "The light is switched on successfully.", Toast.LENGTH_SHORT).show();
-                                                        }
-                                                    });
-                                                } catch (Exception e) {
-                                                    Toast.makeText(getApplicationContext(), e.getMessage().toString(), Toast.LENGTH_LONG).show();
-                                                }
+                                                    @Override
+                                                    public void onSuccess() {
+                                                        //Toast.makeText(getApplicationContext(), "The light is switched on successfully.", Toast.LENGTH_SHORT).show();
+                                                    }
+                                                });
+                                            } catch (Exception e) {
+                                                Toast.makeText(getApplicationContext(), e.getMessage().toString(), Toast.LENGTH_LONG).show();
                                             }
                                             try {
                                                 Call<Dispositivo> call_put = apiService.put((long)dispositivo.getIdDispositivo(), dispositivo.isEstado());
@@ -222,47 +205,23 @@ public class Activity_Dispositivos extends AppCompatActivity {
                                             }
                                         }else{
                                             try {
-                                                if (dispositivo.getModelo().equals("IOT-BASED")) {
-                                                    try {
-                                                        dispositivo.setEstado(!dispositivo.isEstado());
-                                                        Call<ResponseBody> call_api = apiServiceTuya.offBreake();
-                                                        call_api.enqueue(new Callback<ResponseBody>() {
-                                                            @Override
-                                                            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                                                                if (response.isSuccessful()) {
-                                                                    //Toast.makeText(getApplicationContext(), "Se registro correctamente", Toast.LENGTH_LONG).show();
-                                                                } else {
-                                                                    // Handle unsuccessful response
-                                                                }
-                                                            }
-                                                            @Override
-                                                            public void onFailure(Call<ResponseBody> call, Throwable t) {
-                                                                // Ocurrió un error de red o de conexión
-                                                                // Aquí puedes manejar el error si es necesario
-                                                            }
-                                                        });
-                                                    } catch (Exception e) {
-                                                        Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_LONG).show();
+                                                dispositivo.setEstado(!dispositivo.isEstado());
+                                                mDevice.publishDps("{\"1\": true}", new IResultCallback() {
+                                                    @Override
+                                                    public void onError(String code, String error) {
+                                                        //Toast.makeText(getApplicationContext(), "Failed to switch on the light.", Toast.LENGTH_SHORT).show();
                                                     }
-                                                } else {
-                                                    try {
-                                                        dispositivo.setEstado(!dispositivo.isEstado());
-                                                        mDevice.publishDps("{\"1\": true}", new IResultCallback() {
-                                                            @Override
-                                                            public void onError(String code, String error) {
-                                                                //Toast.makeText(getApplicationContext(), "Failed to switch on the light.", Toast.LENGTH_SHORT).show();
-                                                            }
 
-                                                            @Override
-                                                            public void onSuccess() {
-                                                                //Toast.makeText(getApplicationContext(), "The light is switched on successfully.", Toast.LENGTH_SHORT).show();
-                                                            }
-                                                        });
-
-                                                    } catch (Exception e) {
-                                                        Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_LONG).show();
+                                                    @Override
+                                                    public void onSuccess() {
+                                                        //Toast.makeText(getApplicationContext(), "The light is switched on successfully.", Toast.LENGTH_SHORT).show();
                                                     }
-                                                }
+                                                });
+
+                                            } catch (Exception e) {
+                                                Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_LONG).show();
+                                            }
+                                            try {
                                                 Call<Dispositivo> call_put = apiService.put((long)dispositivo.getIdDispositivo(), dispositivo.isEstado());
                                                 call_put.enqueue(new Callback<Dispositivo>() {
                                                     @Override
@@ -288,42 +247,33 @@ public class Activity_Dispositivos extends AppCompatActivity {
 
                                         break;
                                     case 2:
+                                        IThingDevice mDevice2 = ThingHomeSdk.newDeviceInstance(dispositivo.getDevId());
                                         //animationView.setVisibility(View.VISIBLE);
-                                        if (dispositivo.getModelo().equals("Tomacorriente")) {
+                                        if (dispositivo.getModelo().equals("wf_cz")) {
                                             try {
                                                 dispositivo.setEstado(!dispositivo.isEstado());
                                                 if (dispositivo.isEstado()) {
-                                                    Call<ResponseBody> call_offToma = apiServiceTuya.offToma1();
-                                                    call_offToma.enqueue(new Callback<ResponseBody>() {
+                                                    mDevice2.publishDps("{\"1\": true}", new IResultCallback() {
                                                         @Override
-                                                        public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                                                            if (response.isSuccessful()) {
-                                                                //Toast.makeText(getApplicationContext(), "Se registro correctamente", Toast.LENGTH_LONG).show();
-                                                            } else {
-                                                                // Handle unsuccessful response
-                                                            }
+                                                        public void onError(String code, String error) {
+                                                            //Toast.makeText(getApplicationContext(), "Failed to switch on the light.", Toast.LENGTH_SHORT).show();
                                                         }
+
                                                         @Override
-                                                        public void onFailure(Call<ResponseBody> call, Throwable t) {
-                                                            // Ocurrió un error de red o de conexión
-                                                            // Aquí puedes manejar el error si es necesario
+                                                        public void onSuccess() {
+                                                            //Toast.makeText(getApplicationContext(), "The light is switched on successfully.", Toast.LENGTH_SHORT).show();
                                                         }
                                                     });
                                                 } else {
-                                                    Call<ResponseBody> call_onToma = apiServiceTuya.onToma1();
-                                                    call_onToma.enqueue(new Callback<ResponseBody>() {
+                                                    mDevice2.publishDps("{\"1\": false}", new IResultCallback() {
                                                         @Override
-                                                        public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                                                            if (response.isSuccessful()) {
-                                                                //Toast.makeText(getApplicationContext(), "Se registro correctamente", Toast.LENGTH_LONG).show();
-                                                            } else {
-                                                                // Handle unsuccessful response
-                                                            }
+                                                        public void onError(String code, String error) {
+                                                            //Toast.makeText(getApplicationContext(), "Failed to switch on the light.", Toast.LENGTH_SHORT).show();
                                                         }
+
                                                         @Override
-                                                        public void onFailure(Call<ResponseBody> call, Throwable t) {
-                                                            // Ocurrió un error de red o de conexión
-                                                            // Aquí puedes manejar el error si es necesario
+                                                        public void onSuccess() {
+                                                            //Toast.makeText(getApplicationContext(), "The light is switched on successfully.", Toast.LENGTH_SHORT).show();
                                                         }
                                                     });
                                                 }
@@ -336,42 +286,33 @@ public class Activity_Dispositivos extends AppCompatActivity {
                                         adapterDispositivo.notifyItemChanged(posicion);
                                         break;
                                     case 3:
+                                        IThingDevice mDevice3 = ThingHomeSdk.newDeviceInstance(dispositivo.getDevId());
                                         //animationView.setVisibility(View.VISIBLE);
-                                        if (dispositivo.getModelo().equals("Tomacorriente")) {
+                                        if (dispositivo.getModelo().equals("wf_cz")) {
                                             try {
                                                 dispositivo.setEstado2(!dispositivo.isEstado2());
                                                 if (dispositivo.isEstado2()) {
-                                                    Call<ResponseBody> call_offToma = apiServiceTuya.offToma2();
-                                                    call_offToma.enqueue(new Callback<ResponseBody>() {
+                                                    mDevice3.publishDps("{\"2\": true}", new IResultCallback() {
                                                         @Override
-                                                        public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                                                            if (response.isSuccessful()) {
-                                                                //Toast.makeText(getApplicationContext(), "Se registro correctamente", Toast.LENGTH_LONG).show();
-                                                            } else {
-                                                                // Handle unsuccessful response
-                                                            }
+                                                        public void onError(String code, String error) {
+                                                            //Toast.makeText(getApplicationContext(), "Failed to switch on the light.", Toast.LENGTH_SHORT).show();
                                                         }
+
                                                         @Override
-                                                        public void onFailure(Call<ResponseBody> call, Throwable t) {
-                                                            // Ocurrió un error de red o de conexión
-                                                            // Aquí puedes manejar el error si es necesario
+                                                        public void onSuccess() {
+                                                            //Toast.makeText(getApplicationContext(), "The light is switched on successfully.", Toast.LENGTH_SHORT).show();
                                                         }
                                                     });
                                                 } else {
-                                                    Call<ResponseBody> call_onToma = apiServiceTuya.onToma2();
-                                                    call_onToma.enqueue(new Callback<ResponseBody>() {
+                                                    mDevice3.publishDps("{\"2\": false}", new IResultCallback() {
                                                         @Override
-                                                        public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                                                            if (response.isSuccessful()) {
-                                                                //Toast.makeText(getApplicationContext(), "Se registro correctamente", Toast.LENGTH_LONG).show();
-                                                            } else {
-                                                                // Handle unsuccessful response
-                                                            }
+                                                        public void onError(String code, String error) {
+                                                            //Toast.makeText(getApplicationContext(), "Failed to switch on the light.", Toast.LENGTH_SHORT).show();
                                                         }
+
                                                         @Override
-                                                        public void onFailure(Call<ResponseBody> call, Throwable t) {
-                                                            // Ocurrió un error de red o de conexión
-                                                            // Aquí puedes manejar el error si es necesario
+                                                        public void onSuccess() {
+                                                            //Toast.makeText(getApplicationContext(), "The light is switched on successfully.", Toast.LENGTH_SHORT).show();
                                                         }
                                                     });
                                                 }
@@ -522,7 +463,6 @@ public class Activity_Dispositivos extends AppCompatActivity {
                     @Override
                     public void onResponse(Call<Void> call, Response<Void> response) {
                         try {
-                            apiService.delete(idEliminar);
                             dialog.dismiss();
                             actualizarDatos();
                             Toast.makeText(getApplicationContext(), "Se elimino el dispositivo", Toast.LENGTH_LONG).show();
