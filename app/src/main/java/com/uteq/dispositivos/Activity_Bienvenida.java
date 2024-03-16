@@ -157,7 +157,7 @@ public class Activity_Bienvenida extends AppCompatActivity {
         /*ThingHomeSdk.getUserInstance().loginWithEmail("593", "maquillajepro90@gmail.com", "9090", new ILoginCallback() {
             @Override
             public void onSuccess(User user) {
-                ThingHomeSdk.getHomeManagerInstance().joinHomeByInviteCode("EPMWR5" , new IResultCallback() {
+                ThingHomeSdk.getHomeManagerInstance().joinHomeByInviteCode("EPJ4YR" , new IResultCallback() {
                     @Override
                     public void onError(String code, String error) {
                         Toast.makeText(getApplicationContext(), "code: " + code + "error:" + error, Toast.LENGTH_SHORT).show();

@@ -88,7 +88,7 @@ public class Activity_Registrar extends AppCompatActivity {
                         ThingHomeSdk.getUserInstance().logout(new ILogoutCallback() {
                             @Override
                             public void onSuccess() {
-                                Toast.makeText(getApplicationContext(),"cerro sesion", Toast.LENGTH_SHORT).show();
+                                //Toast.makeText(getApplicationContext(),"cerro sesion", Toast.LENGTH_SHORT).show();
                             }
 
                             @Override
