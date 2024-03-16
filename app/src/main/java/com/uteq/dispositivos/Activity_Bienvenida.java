@@ -154,19 +154,42 @@ public class Activity_Bienvenida extends AppCompatActivity {
 
         ThingHomeSdk.init(getApplication(), "fqkatyqm49kdjn5u8t9w", "sfa3qsqvh9fs987ahc345qj4ej9u8yfm");
 
+        /*ThingHomeSdk.getUserInstance().loginWithEmail("593", "maquillajepro90@gmail.com", "9090", new ILoginCallback() {
+            @Override
+            public void onSuccess(User user) {
+                ThingHomeSdk.getHomeManagerInstance().joinHomeByInviteCode("EPMWR5" , new IResultCallback() {
+                    @Override
+                    public void onError(String code, String error) {
+                        Toast.makeText(getApplicationContext(), "code: " + code + "error:" + error, Toast.LENGTH_SHORT).show();
+                        Log.i("Error: ", error + ", " + code);
+                    }
 
+                    @Override
+                    public void onSuccess() {
+                        Toast.makeText(getApplicationContext(),"Todo bien",Toast.LENGTH_LONG).show();
+
+                    }
+                });
+            }
+
+            @Override
+            public void onError(String code, String error) {
+                Toast.makeText(getApplicationContext(), "code: " + code + "error:" + error, Toast.LENGTH_SHORT).show();
+            }
+        });*/
 
 
         /*ThingHomeSdk.getMemberInstance().getInvitationMessage(190971144, new IThingDataCallback<InviteMessageBean>() {
             @Override
             public void onSuccess(InviteMessageBean result) {
-                Toast.makeText(getApplicationContext(),"code: " + result.getInvitationCode(), Toast.LENGTH_LONG).show();
-                Log.i("code: ",result.getInvitationCode());
+                Toast.makeText(getApplicationContext(), "code: " + result.getInvitationCode(), Toast.LENGTH_SHORT).show();
+                Log.i("Code: ",result.getInvitationCode());
             }
 
             @Override
             public void onError(String errorCode, String errorMessage) {
-                // onErr
+                Toast.makeText(getApplicationContext(), "code: " + errorCode + "error:" + errorMessage, Toast.LENGTH_SHORT).show();
+                Log.i("Error: ",errorMessage);
             }
         });*/
 

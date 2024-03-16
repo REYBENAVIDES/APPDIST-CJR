@@ -1,9 +1,13 @@
 package com.uteq.dispositivos;
 
+import com.thingclips.sdk.home.bean.InviteMessageBean;
+import com.thingclips.smart.android.user.api.ILoginCallback;
+import com.thingclips.smart.android.user.api.ILogoutCallback;
 import com.thingclips.smart.android.user.api.IRegisterCallback;
 import com.thingclips.smart.android.user.bean.User;
 import com.thingclips.smart.home.sdk.ThingHomeSdk;
 import com.thingclips.smart.sdk.api.IResultCallback;
+import com.thingclips.smart.sdk.api.IThingDataCallback;
 import com.uteq.dispositivos.ApiService.ApiUrl;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -14,6 +18,7 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -42,6 +47,8 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class Activity_Registrar extends AppCompatActivity {
 
+    String code = "";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -68,6 +75,41 @@ public class Activity_Registrar extends AppCompatActivity {
 
         llDatos.setVisibility(View.VISIBLE);
         llVerificar.setVisibility(View.GONE);
+
+
+        ThingHomeSdk.getUserInstance().loginWithEmail("593", "ereyb@uteq.edu.ec", "12345", new ILoginCallback() {
+            @Override
+            public void onSuccess(User user) {
+                ThingHomeSdk.getMemberInstance().getInvitationMessage(190971144, new IThingDataCallback<InviteMessageBean>() {
+                    @Override
+                    public void onSuccess(InviteMessageBean result) {
+                        Log.i("Codigo: ",result.getInvitationCode());
+                        code = result.getInvitationCode();
+                        ThingHomeSdk.getUserInstance().logout(new ILogoutCallback() {
+                            @Override
+                            public void onSuccess() {
+                                Toast.makeText(getApplicationContext(),"cerro sesion", Toast.LENGTH_SHORT).show();
+                            }
+
+                            @Override
+                            public void onError(String errorCode, String errorMsg) {
+                            }
+                        });
+                    }
+
+                    @Override
+                    public void onError(String errorCode, String errorMessage) {
+                        Toast.makeText(getApplicationContext(), "code: " + errorCode + "error:" + errorMessage, Toast.LENGTH_SHORT).show();
+                        Log.i("Error: ",errorMessage);
+                    }
+                });
+            }
+
+            @Override
+            public void onError(String code, String error) {
+                Toast.makeText(getApplicationContext(), "code: " + code + "error:" + error, Toast.LENGTH_SHORT).show();
+            }
+        });
 
         btnAtras.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -184,10 +226,11 @@ public class Activity_Registrar extends AppCompatActivity {
                                         @Override
                                         public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                                             if (response.isSuccessful()) {
-                                                ThingHomeSdk.getHomeManagerInstance().joinHomeByInviteCode("39JJUC" , new IResultCallback() {
+                                                ThingHomeSdk.getHomeManagerInstance().joinHomeByInviteCode(code , new IResultCallback() {
                                                     @Override
                                                     public void onError(String code, String error) {
-
+                                                        Toast.makeText(getApplicationContext(),"Error",Toast.LENGTH_LONG).show();
+                                                        Log.i("Error: ", code + ", " + error);
                                                     }
 
                                                     @Override
