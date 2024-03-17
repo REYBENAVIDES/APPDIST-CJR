@@ -403,7 +403,7 @@ public class Activity_Facultades extends AppCompatActivity {
                     int usuario_id = 0;
                     boolean comprobar = false;
                     String nUsuario = "";
-                    Toast.makeText(getApplicationContext(),"correo: " + txtCorreo, Toast.LENGTH_LONG).show();
+                    //Toast.makeText(getApplicationContext(),"correo: " + txtCorreo, Toast.LENGTH_LONG).show();
                     for (Usuario usuario : usuarios) {
                         if(usuario.getEmail().equals(txtCorreo.getText().toString())) {
                             usuario_id = usuario.getIdUsuario();

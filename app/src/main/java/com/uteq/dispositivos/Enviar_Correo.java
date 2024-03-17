@@ -33,8 +33,8 @@ public class Enviar_Correo extends AsyncTask<Void, Void, Void> {
 
     private void sendMail() {
         String host = "smtp.gmail.com";
-        String username = "ereyb@uteq.edu.ec"; // Reemplaza con tu dirección de correo de Gmail
-        String password = "bofn xvtv cswq tdty"; // Reemplaza con tu contraseña de Gmail
+        String username = "ereyb@uteq.edu.ec";
+        String password = "bofn xvtv cswq tdty";
 
         Properties props = new Properties();
         props.put("mail.smtp.auth", "true");

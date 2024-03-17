@@ -86,11 +86,18 @@ public class Activity_Dispositivos extends AppCompatActivity {
         actualizarDatos();
 
         ImageButton btnAgregar = findViewById(R.id.btnAgregarDispositivo);
-        btnAgregar.setOnClickListener(view -> {
-            //showDialogAgregarDispositivos();
-            Intent intent = new Intent(getApplicationContext(), Activity_DispositivoAgregar.class);
-            intent.putExtra("idAula", idAula);
-            startActivity(intent);
+
+        btnAgregar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent intent = new Intent(getApplicationContext(), Activity_DispositivoAgregar.class);
+                intent.putExtra("idAula", idAula);
+                //showDialogAgregarDispositivos();
+
+                startActivity(intent);
+
+            }
         });
 
         ImageButton btnActualizar = findViewById(R.id.btnActualizar);

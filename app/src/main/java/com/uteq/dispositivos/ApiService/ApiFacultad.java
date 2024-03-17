@@ -22,6 +22,6 @@ public interface ApiFacultad {
     @POST("/api/facultades")
     Call<ResponseBody> post(@Body RequestBody requestBody);
 
-    @DELETE("/api/facultades/{id}")
+    @DELETE("/api/facultades/delete/{id}")
     Call<Void> delete(@Path("id") int id);
 }
